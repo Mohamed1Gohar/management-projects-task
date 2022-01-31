@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -104,7 +105,11 @@ class AccountController extends Controller
     // Get All tasks To Project < 100
     public function getTasks() {
 
-//        return view('get-tasks',compact('account'));
+        $tasks = Task::with('project:id,name,price')->whereHas('project', function ($query) {
+            $query->where('price', '>', 100);
+        })->get();
+
+        return view('get-tasks',compact('tasks'));
 
     }
 

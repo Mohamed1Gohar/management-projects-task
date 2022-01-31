@@ -24,25 +24,19 @@
     @endif
     <table class="table table-bordered">
         <tr>
-            <th>S.No</th>
-            <th>Account Name</th>
-            <th width="280px">Action</th>
+            <th>#</th>
+            <th>Task Name</th>
+            <th>project Name</th>
+            <th>project price</th>
         </tr>
-        @foreach ($accounts as $account)
+        @foreach ($tasks as $task)
             <tr>
-                <td>{{ $account->id }}</td>
-                <td>{{ $account->name }}</td>
-                <td>
-                    <form action="{{ route('accounts.destroy',$account->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('accounts.edit',$account->id) }}">Edit</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <td>{{ $task->id }}</td>
+                <td>{{ $task->name }}</td>
+                <td>{{ $task->project->name }}</td>
+                <td>{{ $task->project->price }}</td>
             </tr>
         @endforeach
     </table>
-{!! $accounts->links() !!}
 </body>
 </html>
